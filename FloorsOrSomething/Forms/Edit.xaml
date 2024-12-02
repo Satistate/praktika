@@ -1,0 +1,170 @@
+﻿<Window x:Class="FloorsOrSomething.Forms.Edit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FloorsOrSomething.Forms"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        MinHeight="350"
+        MinWidth="450"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        Title="Edit" Height="400" Width="450">
+    <Border Background="White" CornerRadius="40,40,0,40" MouseDown="Grid_MouseDown">
+        <Border Background="#F4E8D3" Margin="5" CornerRadius="40,40,40,40">
+            <Grid x:Name="MainGrid">
+                <Border Background="White" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" Height="30" CornerRadius="0,0,20,20">
+                    <Label Content="Добавление" HorizontalAlignment="Center" FontSize="16"></Label>
+                </Border>
+                <Border Margin="10,50,10,10" Background="White" Opacity="0.5" CornerRadius="40,40,40,40">
+
+                </Border>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" x:Name="ExitBT" Click="CloseButton_Click"  MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"
+                    Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                    Background="Transparent" BorderBrush="Transparent" Foreground="Black" Height="40" Width="40">
+                    <materialDesign:PackIcon Kind="WindowClose" Height="40" Width="40" />
+                </Button>
+                
+                <Grid x:Name="partners" Visibility="Collapsed">
+                    
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="20,60,0,40">
+                        <ComboBox  x:Name="partnerTypeComboBox"
+                        materialDesign:HintAssist.Hint="Тип партнёра"
+                        FontSize="16"
+                        Height="50"
+                        Width="200"
+                        Margin="0,0,0,10">
+                            <ComboBoxItem Content="ЗАО" Tag="1"/>
+                            <ComboBoxItem Content="ООО" Tag="2"/>
+                            <ComboBoxItem Content="ПАО" Tag="3"/>
+                            <ComboBoxItem Content="ОАО" Tag="4"/>
+                        </ComboBox>
+
+                        <TextBox x:Name="partner_nameTB"
+                    VerticalAlignment="Center"
+                    Width="200"
+                    Height="50"
+                    FontSize="16"
+                    Margin="0,0,0,10"
+                    materialDesign:HintAssist.Hint="Имя партнёра"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                        <TextBox x:Name="directorTB"
+                    VerticalAlignment="Center"
+                    Width="200"
+                    Height="50"
+                    FontSize="16"
+                    Margin="0,0,0,10"
+                    materialDesign:HintAssist.Hint="Директор"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                        <TextBox x:Name="emailTB"
+                    VerticalAlignment="Center"
+                    Width="200"
+                    Height="50"
+                    FontSize="16"
+                    Margin="0,0,0,10"
+                    materialDesign:HintAssist.Hint="Электронная почта"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                    </StackPanel>
+                    <StackPanel Margin="0,60,10,40" HorizontalAlignment="Right" VerticalAlignment="Stretch" Orientation="Vertical">
+
+                        <TextBox x:Name="phone_numberTB"
+                    VerticalAlignment="Center"
+                    Width="200"
+                    Height="50"
+                    FontSize="16"
+                    Margin="0,0,0,10"
+                    materialDesign:HintAssist.Hint="Номер телефона"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                        <TextBox x:Name="legal_addressTB"
+                    VerticalAlignment="Center"
+                    Width="200"
+                    Height="50"
+                    FontSize="16"
+                    Margin="0,0,0,10"
+                    materialDesign:HintAssist.Hint="Юридический адрес"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                                <TextBox x:Name="tinTB"
+                    VerticalAlignment="Center"
+                    Width="200"
+                    Height="50"
+                    FontSize="16"
+                    Margin="0,0,0,10"
+                    materialDesign:HintAssist.Hint="ИНН"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                        <TextBox x:Name="ratingTB"
+                    VerticalAlignment="Center"
+                    Width="200"
+                    Height="50"
+                    FontSize="16"
+                    Margin="0,0,0,10"
+                    materialDesign:HintAssist.Hint="Рейтинг"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    </StackPanel>
+                    <Button Margin="0,0,0,25" x:Name="ReloadCB" Click="AddBT_Click" Width="200" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+          Content="Добавить"
+          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+          Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+          ToolTip="Resource name: MaterialDesignRaisedSecondaryLightButton" Background="#FF67BA80" BorderBrush="#FF67BA80" />
+                </Grid>
+                <!--второй грид-->
+                <Grid x:Name="partners_product" Visibility="Collapsed">
+                    
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="20,60,0,40">
+
+                        <ComboBox x:Name="product_nameCB"
+                            materialDesign:HintAssist.Hint="Название продукта"
+                            FontSize="16"
+                            Height="50"
+                            Width="200"
+                            Margin="0,0,0,10"
+                            SelectedValuePath="Id"
+                            DisplayMemberPath="ProductName">
+                        </ComboBox>
+
+                        <ComboBox x:Name="partner_nameCB"
+                        materialDesign:HintAssist.Hint="Название партнёра"
+                        FontSize="16"
+                        Height="50"
+                        Width="200"
+                        Margin="0,0,0,10"
+                        SelectedValuePath="Id"
+                        DisplayMemberPath="PartnerName">
+                        </ComboBox>
+
+                        <TextBox x:Name="productCountTB"
+          VerticalAlignment="Center"
+          Width="200"
+          Height="50"
+          FontSize="16"
+          Margin="0,0,0,10"
+          materialDesign:HintAssist.Hint="Количество продуктов"
+          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                        <TextBox x:Name="dateOfSaleTB"
+          VerticalAlignment="Center"
+          Width="200"
+          Height="50"
+          FontSize="16"
+          Margin="0,0,0,10"
+          materialDesign:HintAssist.Hint="Дата продажи"
+          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    </StackPanel>
+                    <Button Margin="0,0,0,25" x:Name="partnersProductAddingBT" Click="AddBT_Click" Width="200" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+Content="Добавить"
+IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"
+ToolTip="Resource name: MaterialDesignRaisedSecondaryLightButton" Background="#FF67BA80" BorderBrush="#FF67BA80" />
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
+</Window>
